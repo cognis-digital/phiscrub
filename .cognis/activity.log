@@ -2,3 +2,4 @@
 2024-06-19T09:23:13  chore(deps): add a dry-run flag
 2024-07-07T16:40:20  test(core): respect .gitignore when walking
 2024-07-27T11:57:27  test(rules): guard against ReDoS in patterns
+2024-08-14T18:14:34  refactor: tidy internals
