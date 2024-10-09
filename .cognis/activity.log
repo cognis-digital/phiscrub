@@ -5,3 +5,4 @@
 2024-08-14T18:14:34  refactor: tidy internals
 2024-09-03T13:31:41  docs: expand examples
 2024-09-21T08:48:48  perf(rules): clarify the README quickstart
+2024-10-09T15:05:55  test(engine): short-circuit on first critical
