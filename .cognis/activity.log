@@ -9,3 +9,4 @@
 2024-10-29T10:22:02  feat(mcp): dedupe overlapping findings
 2024-11-16T17:39:09  feat(detect): add color + severity icons
 2024-12-06T12:56:16  refactor(engine): pin the test dependencies
+2024-12-24T19:13:23  perf(report): improve the demo scenario
