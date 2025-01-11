@@ -10,3 +10,4 @@
 2024-11-16T17:39:09  feat(detect): add color + severity icons
 2024-12-06T12:56:16  refactor(engine): pin the test dependencies
 2024-12-24T19:13:23  perf(report): improve the demo scenario
+2025-01-11T14:30:30  build(detect): add usage examples to help
