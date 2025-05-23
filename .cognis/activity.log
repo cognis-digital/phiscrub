@@ -17,3 +17,4 @@
 2025-03-28T18:38:58  build(scoring): bump the dev toolchain
 2025-04-16T13:55:05  build(fixtures): make timestamps timezone-aware
 2025-05-05T08:12:12  docs(config): document the config keys
+2025-05-23T15:29:19  refactor(ci): add pagination to large reports
