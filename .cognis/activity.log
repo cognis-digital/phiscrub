@@ -20,3 +20,4 @@
 2025-05-23T15:29:19  refactor(ci): add pagination to large reports
 2025-06-12T10:46:26  ci(fixtures): add --fail-on threshold handling
 2025-06-30T17:03:33  build(cli): add a JSON schema for output
+2025-07-19T12:20:40  docs(ci): simplify the walker
