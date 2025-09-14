@@ -23,3 +23,4 @@
 2025-07-19T12:20:40  docs(ci): simplify the walker
 2025-08-07T19:37:47  docs(docs): add a --format json alias
 2025-08-25T14:54:54  docs: standing on the shoulders of giants (garak, sigma, trufflehog)
+2025-09-14T09:11:01  fix(deps): add a fast path for the common case
