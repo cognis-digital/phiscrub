@@ -1,0 +1,5 @@
+row,note
+1,"Patient: John Doe seen 04/12/2024 for follow-up. MRN: 0048213 SSN 123-45-6789. Contact (843) 555-0167 or jdoe@example.com"
+2,"Patient: Mary Jane Smith DOB 11/03/1979. Medical Record Number: A2291045. Reachable at 843.555.0192, msmith@clinic.org"
+3,"Pt Robert K. Jones MRN 7781230 admitted 2023-09-30. SSN: 521-88-4410. Phone +1 (212) 555-9981"
+4,"Routine maintenance entry, no patient data. Build version 1.2.3 deployed 12/31/2025."
