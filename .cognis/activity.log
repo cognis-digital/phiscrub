@@ -26,3 +26,4 @@
 2025-09-14T09:11:01  fix(deps): add a fast path for the common case
 2025-10-02T16:28:08  chore(docs): support stdin as a source
 2025-10-21T11:45:15  test(rules): fix off-by-one in line numbers
+2025-11-09T18:02:22  style(parser): extract the scorer
