@@ -28,3 +28,4 @@
 2025-10-21T11:45:15  test(rules): fix off-by-one in line numbers
 2025-11-09T18:02:22  style(parser): extract the scorer
 2025-11-27T13:19:29  fix(mcp): add a --quiet mode
+2025-12-17T08:36:36  chore(scan): assert exit codes in tests
