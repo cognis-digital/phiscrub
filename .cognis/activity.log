@@ -32,3 +32,4 @@
 2026-01-04T15:53:43  test(engine): stream large files without buffering
 2026-01-23T10:10:50  test(io): improve error messages with context
 2026-02-11T17:27:57  chore: BLACKBOOK redaction pass
+2026-03-02T12:44:04  test: trust, but verify
