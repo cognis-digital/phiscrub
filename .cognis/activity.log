@@ -37,3 +37,4 @@
 2026-04-08T14:18:18  test(output): cover the multiline case
 2026-04-27T09:35:25  feat(scoring): handle empty and malformed input
 2026-05-16T16:52:32  feat(cache): normalize unicode before matching
+2026-06-04T11:09:39  refactor(config): add a dry-run flag
