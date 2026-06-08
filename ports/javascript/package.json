@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/phiscrub",
+  "version": "0.2.0",
+  "description": "JavaScript port of phiscrub (Cognis Neural Suite)",
+  "bin": {
+    "phiscrub": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}
