@@ -1,2 +1,11 @@
-"""PHISCRUB — Stream-scan logs, CSVs, and free-text notes for PHI (names, MRNs, SSNs, dates, addresses) and redact or tokenize in place."""
-__version__ = "0.1.0"
+"""phiscrub — part of the Cognis Neural Suite."""
+try:  # re-export the tool's public API + identity from core
+    from phiscrub.core import *  # noqa: F401,F403
+except Exception:  # pragma: no cover
+    pass
+try:
+    from phiscrub.core import TOOL_NAME, TOOL_VERSION
+except Exception:  # pragma: no cover
+    TOOL_NAME = "phiscrub"
+    TOOL_VERSION = "0.1.0"
+__version__ = TOOL_VERSION
