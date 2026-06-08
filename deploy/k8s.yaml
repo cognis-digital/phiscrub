@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: phiscrub, labels: { app: phiscrub } }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: phiscrub } }
+  template:
+    metadata: { labels: { app: phiscrub } }
+    spec:
+      containers:
+        - name: phiscrub
+          image: ghcr.io/cognis-digital/phiscrub:latest
+          ports: [{ containerPort: 8000 }]
+          resources:
+            requests: { cpu: "50m", memory: "64Mi" }
+            limits: { cpu: "500m", memory: "256Mi" }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: phiscrub }
+spec:
+  selector: { app: phiscrub }
+  ports: [{ port: 80, targetPort: 8000 }]
