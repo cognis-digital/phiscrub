@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-phiscrub
+pip install "git+https://github.com/cognis-digital/phiscrub.git"
 phiscrub scan .            # → prioritized findings in seconds
 ```
 
@@ -51,7 +51,7 @@ Drop-in pre-commit/CI gate that fails the build when PHI leaks into repos, logs,
 ## Quick start
 
 ```bash
-pip install cognis-phiscrub
+pip install "git+https://github.com/cognis-digital/phiscrub.git"
 phiscrub --version
 phiscrub scan .                       # scan current project
 phiscrub scan . --format json         # machine-readable
