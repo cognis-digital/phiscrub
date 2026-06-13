@@ -20,6 +20,33 @@ pip install cognis-phiscrub
 phiscrub scan .            # → prioritized findings in seconds
 ```
 
+## Usage — step by step
+
+`phiscrub` is gitleaks-for-HIPAA: it scans logs/CSVs/notes for PHI (names, MRNs, SSNs, dates, phones, emails) and can redact in place.
+
+1. **Install**:
+   ```bash
+   pip install -e .
+   phiscrub --version
+   ```
+2. **Scan** a file or directory (read-only). Exit code is `1` when PHI is found, `0` when clean:
+   ```bash
+   phiscrub scan ./logs
+   ```
+3. **Narrow the detectors** and emit JSON for tooling:
+   ```bash
+   phiscrub scan visit.csv --format json --kinds ssn,mrn,email | jq .
+   ```
+4. **Redact** PHI in place once you have reviewed findings (use `--dry-run` first to preview):
+   ```bash
+   phiscrub redact notes.txt --dry-run
+   phiscrub redact notes.txt
+   ```
+5. **Automate in CI** — fail the build when PHI leaks into artifacts:
+   ```bash
+   phiscrub scan ./build-logs || exit 1   # exit 1 = PHI found
+   ```
+
 ## Contents
 
 - [Why phiscrub?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
