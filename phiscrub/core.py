@@ -109,7 +109,9 @@ DETECTORS: list[Detector] = [
     Detector(
         "mrn",
         # Explicitly labeled medical record numbers: MRN: 1234567
-        re.compile(r"\b(?:MRN|Medical\s+Record(?:\s+(?:No|Number|#))?)\b[:#\s]*([A-Z0-9-]{5,12})",
+        # The captured value must contain at least one digit to avoid matching
+        # plain English words (e.g. "Number") that follow the label prefix.
+        re.compile(r"\b(?:MRN|Medical\s+Record(?:\s+(?:No|Number|#))?)\b[:#\s]*([A-Z0-9-]*\d[A-Z0-9-]*)",
                    re.IGNORECASE),
     ),
     Detector(
@@ -118,8 +120,11 @@ DETECTORS: list[Detector] = [
     ),
     Detector(
         "phone",
+        # Use digit-boundary lookbehind/lookahead instead of \b so that
+        # parenthesised area codes like (843) are correctly anchored —
+        # \b does not fire between a space and '(' since both are non-word chars.
         re.compile(
-            r"\b(?:\+?1[-.\s]?)?(?:\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}\b"
+            r"(?<![0-9])(?:\+?1[-.\s]?)?(?:\(\d{3}\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}(?![0-9])"
         ),
         _valid_phone,
     ),

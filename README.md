@@ -20,6 +20,12 @@ pip install "git+https://github.com/cognis-digital/phiscrub.git"
 phiscrub scan .            # → prioritized findings in seconds
 ```
 
+<!-- cognis:layman:start -->
+## What is this?
+
+phiscrub scans your files, logs, and spreadsheets for private patient information — names, social security numbers, medical record numbers, phone numbers, email addresses, and dates of birth — and either flags them or replaces them with safe placeholders in one command. It is designed for healthcare developers and data teams who need to make sure patient data never accidentally ends up in code repositories, test files, or bug reports. You can run it as a simple command-line tool, plug it into your automated build pipeline so the build fails if sensitive data is detected, or let AI coding assistants call it directly through its MCP server interface. No account or internet connection is required.
+<!-- cognis:layman:end -->
+
 ## Contents
 
 - [Why phiscrub?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
@@ -48,6 +54,42 @@ Drop-in pre-commit/CI gate that fails the build when PHI leaks into repos, logs,
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:install:start -->
+## Install
+
+`phiscrub` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/phiscrub/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/phiscrub/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/phiscrub.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/phiscrub.git"  # uv
+pip install "git+https://github.com/cognis-digital/phiscrub.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/phiscrub.git
+cd phiscrub && pip install .
+```
+
+Then run:
+```sh
+phiscrub --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
