@@ -1,6 +1,20 @@
 """PHISCRUB MCP server — exposes scan() as an MCP tool for Cognis.Studio."""
 from __future__ import annotations
-from phiscrub.core import scan, to_json
+
+import json
+
+from phiscrub.core import scan_path
+
+
+def _findings_to_json(results: dict) -> str:
+    """Serialise scan_path() results to a JSON string."""
+    payload = {
+        fp: [f.to_dict() for f in findings]
+        for fp, findings in results.items()
+        if findings
+    }
+    return json.dumps(payload, indent=2)
+
 
 def serve() -> int:
     """Start an MCP stdio server. Requires the optional 'mcp' extra:
@@ -15,8 +29,12 @@ def serve() -> int:
 
     @app.tool()
     def phiscrub_scan(target: str) -> str:
-        """Stream-scan logs, CSVs, and free-text notes for PHI (names, MRNs, SSNs, dates, addresses) and redact or tokenize in place.. Returns JSON findings."""
-        return to_json(scan(target))
+        """Scan a file or directory for PHI (names, MRNs, SSNs, dates,
+        addresses).  Returns JSON findings."""
+        if not target or not isinstance(target, str):
+            return json.dumps({"error": "target must be a non-empty string"})
+        results = scan_path(target)
+        return _findings_to_json(results)
 
     app.run()
     return 0

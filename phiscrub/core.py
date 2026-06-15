@@ -65,11 +65,12 @@ def _valid_date(value: str) -> bool:
         # all <= 31: treat last as a 2-digit year, first two as month/day
         m, d = nums[0], nums[1]
     else:
-        rest = [n for n in nums if n != year] + ([] if nums.count(year) == 1 else [])
-        rest = [n for n in nums if n is not year]
-        # rebuild order-independent month/day
-        nz = [n for n in nums if n != year]
-        m, d = nz[0], nz[1]
+        # Remove exactly one occurrence of the year value; keep the remaining two.
+        remaining = list(nums)
+        remaining.remove(year)
+        if len(remaining) != 2:
+            return False
+        m, d = remaining[0], remaining[1]
     if not (1900 <= (year or 1999) <= 2099):
         if year is not None:
             return False
@@ -178,7 +179,13 @@ def scan_text(text: str, kinds: Iterable[str] | None = None) -> list[Finding]:
     """Scan a string and return non-overlapping :class:`Finding` objects.
 
     ``kinds`` optionally restricts which detectors run.
+
+    Raises :class:`TypeError` if *text* is not a string.
     """
+    if not isinstance(text, str):
+        raise TypeError(
+            "scan_text() requires a str, got %s" % type(text).__name__
+        )
     selected = DETECTORS
     if kinds is not None:
         want = set(kinds)
@@ -209,7 +216,18 @@ def scan_text(text: str, kinds: Iterable[str] | None = None) -> list[Finding]:
 
 
 def scan_file(path: str, kinds: Iterable[str] | None = None) -> list[Finding]:
-    """Scan a single file's text content."""
+    """Scan a single file's text content.
+
+    Raises :class:`FileNotFoundError` if *path* does not exist.
+    Raises :class:`IsADirectoryError` if *path* is a directory (use
+    :func:`scan_path` instead).
+    """
+    if not os.path.exists(path):
+        raise FileNotFoundError("No such file: %r" % path)
+    if os.path.isdir(path):
+        raise IsADirectoryError(
+            "%r is a directory; use scan_path() to scan directories" % path
+        )
     with open(path, "r", encoding="utf-8", errors="replace") as fh:
         text = fh.read()
     return scan_text(text, kinds=kinds)
@@ -277,7 +295,11 @@ def redact_file(
     """Redact PHI in a file. Returns the number of redactions.
 
     When ``in_place`` is True the file is only rewritten if something changed.
+
+    Raises :class:`FileNotFoundError` if *path* does not exist.
     """
+    if not os.path.exists(path):
+        raise FileNotFoundError("No such file: %r" % path)
     with open(path, "r", encoding="utf-8", errors="replace") as fh:
         text = fh.read()
     redacted, n = redact_text(text, kinds=kinds)

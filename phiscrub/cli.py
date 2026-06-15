@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from typing import Sequence
 
@@ -122,6 +123,9 @@ def _print_scan_table(results: dict, total: int) -> None:
 
 
 def _do_scan(args: argparse.Namespace) -> int:
+    if not os.path.exists(args.path):
+        print("error: path does not exist: %s" % args.path, file=sys.stderr)
+        return 2
     results = scan_path(args.path, kinds=args.kinds)
     total = sum(len(v) for v in results.values())
     if args.format == "json":
@@ -145,6 +149,9 @@ def _do_scan(args: argparse.Namespace) -> int:
 
 
 def _do_redact(args: argparse.Namespace) -> int:
+    if not os.path.exists(args.path):
+        print("error: path does not exist: %s" % args.path, file=sys.stderr)
+        return 2
     # Scan first so we can report and (optionally) not write.
     results = scan_path(args.path, kinds=args.kinds)
     total = sum(len(v) for v in results.values())
@@ -192,6 +199,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _do_scan(args)
         if args.command == "redact":
             return _do_redact(args)
+    except KeyboardInterrupt:
+        print("\nInterrupted.", file=sys.stderr)
+        return 2
     except FileNotFoundError as exc:
         print("error: %s" % exc, file=sys.stderr)
         return 2
