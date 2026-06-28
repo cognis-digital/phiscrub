@@ -1,0 +1,21 @@
+$ phiscrub-emit --help
+
+usage: phiscrub [-h] [--version] [--format {table,json}] <command> ...
+
+PHISCRUB - gitleaks-for-HIPAA. Scan logs/CSVs/notes for PHI (names, MRNs, SSNs, dates, phones, emails) and redact in place.
+
+positional arguments:
+  <command>
+    scan                scan a file or directory for PHI (read-only CI gate)
+    redact              redact PHI in a file or directory (rewrites in place)
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json}
+                        output format (default: table)
+
+Examples:
+  phiscrub scan ./logs
+  phiscrub scan visit.csv --format json --kinds ssn,mrn
+  phiscrub redact notes.txt

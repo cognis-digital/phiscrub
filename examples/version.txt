@@ -1,0 +1,3 @@
+$ phiscrub-emit --version
+
+phiscrub 0.1.0

@@ -20,6 +20,72 @@ pip install cognis-phiscrub
 phiscrub scan .            # → prioritized findings in seconds
 ```
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ phiscrub-emit --version
+phiscrub 0.1.0
+```
+
+```console
+$ phiscrub-emit --help
+usage: phiscrub [-h] [--version] [--format {table,json}] <command> ...
+
+PHISCRUB - gitleaks-for-HIPAA. Scan logs/CSVs/notes for PHI (names, MRNs, SSNs, dates, phones, emails) and redact in place.
+
+positional arguments:
+  <command>
+    scan                scan a file or directory for PHI (read-only CI gate)
+    redact              redact PHI in a file or directory (rewrites in place)
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  --format {table,json}
+                        output format (default: table)
+
+Examples:
+  phiscrub scan ./logs
+  phiscrub scan visit.csv --format json --kinds ssn,mrn
+  phiscrub redact notes.txt
+```
+
+> Blocks above are real `phiscrub` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"findings": [
+    {
+        "id": "1234567890",
+        "title": "Suspicious Network Traffic",
+        "description": "Possible malicious activity detected on port 443.",
+        "start_time": "2023-02-20T14:30:00Z",
+        "end_time": "2023-02-20T15:30:00Z",
+        "confidence": 0.8,
+        "labels": ["network", "malware"],
+        "observables": [
+            {
+                "type": "ip-dst",
+                "value": "192.168.1.100"
+            },
+            {
+                "type": "port",
+                "value": 443
+            }
+        ]
+    }
+]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Usage — step by step
 
 `phiscrub` is gitleaks-for-HIPAA: it scans logs/CSVs/notes for PHI (names, MRNs, SSNs, dates, phones, emails) and can redact in place.
